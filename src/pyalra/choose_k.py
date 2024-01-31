@@ -12,7 +12,7 @@ def choose_k(
     noise_start: int = 80,
     q: int = 2,
     **kwargs,
-) -> tuple:
+) -> tuple[int, npt.ArrayLike, npt.ArrayLike]:
     if K > np.min(A_norm.shape):
         msg = "For an m by n matrix, K must be smaller than the min(m,n)."
         raise ValueError(msg)
@@ -32,4 +32,4 @@ def choose_k(
 
     k = np.max(np.where(num_of_sds > thresh)) + 1
 
-    return {"k": k, "num_of_sds": num_of_sds, "d": d}
+    return k, num_of_sds, d

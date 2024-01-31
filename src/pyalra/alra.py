@@ -34,10 +34,10 @@ def alra(
     a_norm_rank_k_cor = a_norm_rank_k.copy()
     a_norm_rank_k_cor[a_norm_rank_k <= np.tile(a_norm_rank_k_mins, (len(a_norm_rank_k), 1))] = 0
 
-    sigma_1 = np.apply_along_axis(sp.stats.tstd, 0, a_norm_rank_k_cor, nan_policy="omit")
-    sigma_2 = np.apply_along_axis(sp.stats.tstd, 0, a_norm, nan_policy="omit")
-    mu_1 = np.sum(a_norm_rank_k_cor, axis=0) / np.sum(a_norm_rank_k_cor > 0, axis=0)
-    mu_2 = np.sum(a_norm, axis=0) / np.sum(a_norm > 0, axis=0)
+    sigma_1 = np.apply_along_axis(sp.stats.tstd, 0, a_norm_rank_k_cor)
+    sigma_2 = np.apply_along_axis(sp.stats.tstd, 0, a_norm)
+    mu_1 = np.divide(np.sum(a_norm_rank_k_cor, axis=0), np.sum(a_norm_rank_k_cor > 0, axis=0))
+    mu_2 = np.divide(np.sum(a_norm, axis=0), np.sum(a_norm > 0, axis=0))
 
     toscale = np.logical_and(
         np.logical_and(~np.isnan(sigma_1), ~np.isnan(sigma_2)),
@@ -46,8 +46,9 @@ def alra(
 
     logger.info(f"Scaling all except for {sum(~toscale)} columns")
 
-    sigma_1_2 = sigma_2 / sigma_1
-    toadd = -1 * mu_1 * sigma_2 / sigma_1 + mu_2
+    sigma_1_2 = np.divide(sigma_2, sigma_1)
+
+    toadd = np.add(-np.divide(np.multiply(mu_1, sigma_2), sigma_1), mu_2)
 
     a_norm_rank_k_temp = a_norm_rank_k_cor[:, toscale].copy()
     a_norm_rank_k_temp = np.multiply(a_norm_rank_k_temp, sigma_1_2[toscale])
@@ -62,7 +63,7 @@ def alra(
 
     a_norm_size = a_norm.shape[0] * a_norm.shape[1]
     logger.info(
-        f"{100*sum(lt0)/a_norm_size:.2f}% of the values became negative in the scaling process and were set to zero"
+        f"{100*np.sum(lt0)/a_norm_size:.2f}% of the values became negative in the scaling process and were set to zero"
     )
 
     nonzero_mask = np.logical_and(originally_nonzero, (a_norm_rank_k_cor_sc == 0))
