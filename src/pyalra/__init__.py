@@ -15,4 +15,4 @@ try:
 except PackageNotFoundError:  # pragma: no cover
     __version__ = "unknown"
 
-init_logger()
+init_logger(1)

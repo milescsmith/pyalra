@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pyalra"
-version = "1.0.0"
+version = "1.1.0"
 description = "Translation of the ALRA R package"
 authors = ["Miles Smith <miles-smith@omrf.org>"]
 license = "LGPL3"
@@ -23,7 +23,7 @@ sourcery = "^1.15.0"
 [tool.poetry.dependencies]
 python = ">=3.10,<4"
 scikit-learn = "^1.4.0"
-numpy = "^1.26.3"
+numpy = "~=1.24"
 loguru = "^0.7.2"
 
 [build-system]
