@@ -5,16 +5,29 @@ from loguru import logger
 from sklearn.utils.extmath import randomized_svd
 
 from pyalra.choose_k import choose_k
+from pyalra.logging import init_logger
 
 
 def alra(
-    a_norm: npt.ArrayLike,
+    a_norm: npt.ArrayLike | sp.sparse.spmatrix,
     k: int = 0,
     q: int = 10,
     quantile_prob: float = 0.001,
     seed: float | None = None,
+    debug: bool = False,
+    *,
+    save_log: bool = False,
+    log_level: int = 1,
 ) -> dict[str, npt.ArrayLike]:
+    if debug:
+        init_logger(3)
+
     logger.info(f"Read matrix with {a_norm.shape[0]} cells and {a_norm.shape[1]} genes")
+
+    if isinstance(a_norm, np.matrix):
+        a_norm = a_norm.A
+    elif isinstance(a_norm, sp.sparse.spmatrix):
+        a_norm = a_norm.todense().A
 
     if k == 0:
         k, *_ = choose_k(a_norm)
