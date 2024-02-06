@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pyalra"
-version = "1.3.0"
+version = "1.4.0"
 description = "Translation of the ALRA R package"
 authors = ["Miles Smith <miles-smith@omrf.org>"]
 license = "LGPL3"

@@ -20,7 +20,7 @@ def alra(
     log_level: int = 1,
 ) -> dict[str, npt.ArrayLike]:
     if debug:
-        init_logger(3)
+        init_logger(log_level, save_log)
 
     logger.info(f"Read matrix with {a_norm.shape[0]} cells and {a_norm.shape[1]} genes")
 
@@ -36,19 +36,20 @@ def alra(
     logger.info("Getting nonzeros\n")
     originally_nonzero = a_norm > 0
 
+    logger.debug("Running rsvd")
     u, d, v = randomized_svd(M=a_norm, n_components=k, n_iter=q, random_state=seed)
 
     a_norm_rank_k = np.matmul(np.matmul(u[:, :k], np.diag(d[:k])), v[:k, :])
 
-    logger.info(f"Find the {quantile_prob} quantile of each gene")
-    a_norm_rank_k_mins = abs(np.apply_along_axis(np.quantile, 0, a_norm_rank_k, q=0.001))
+    logger.info(f"Find the {quantile_prob} quantile for each gene")
+    a_norm_rank_k_mins = abs(np.quantile(a_norm_rank_k, axis=0, q=0.001))
 
     logger.info("Sweep")
     a_norm_rank_k_cor = a_norm_rank_k.copy()
     a_norm_rank_k_cor[a_norm_rank_k <= np.tile(a_norm_rank_k_mins, (len(a_norm_rank_k), 1))] = 0
 
-    sigma_1 = np.apply_along_axis(sp.stats.tstd, 0, a_norm_rank_k_cor)
-    sigma_2 = np.apply_along_axis(sp.stats.tstd, 0, a_norm)
+    sigma_1 = sp.stats.tstd(a_norm_rank_k_cor, axis=0)
+    sigma_2 = sp.stats.tstd(a_norm, axis=0)
     mu_1 = np.divide(np.sum(a_norm_rank_k_cor, axis=0), np.sum(a_norm_rank_k_cor > 0, axis=0))
     mu_2 = np.divide(np.sum(a_norm, axis=0), np.sum(a_norm > 0, axis=0))
 
