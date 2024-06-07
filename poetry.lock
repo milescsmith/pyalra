@@ -355,14 +355,14 @@ test = ["array-api-strict", "asv", "gmpy2", "hypothesis (>=6.30)", "mpmath", "po
 
 [[package]]
 name = "sourcery"
-version = "1.17.0"
+version = "1.19.0"
 description = "Magically refactor Python"
 optional = false
 python-versions = "*"
 files = [
-    {file = "sourcery-1.17.0-py2.py3-none-macosx_10_9_universal2.whl", hash = "sha256:1cd2fc122b63817f1e2337cace5c35f5012458dfa0f3db9c8840062bc2efbcd1"},
-    {file = "sourcery-1.17.0-py2.py3-none-manylinux1_x86_64.whl", hash = "sha256:5464d0b5f14e84373b9c7e39a406cd77acaaa3a0c0cf3262ddd4bf93b5fe74ea"},
-    {file = "sourcery-1.17.0-py2.py3-none-win_amd64.whl", hash = "sha256:0a07646e014c5b59fcfbcf142b1c283bbac2fa73f421850cb761d949f7a7bee6"},
+    {file = "sourcery-1.19.0-py2.py3-none-macosx_10_9_universal2.whl", hash = "sha256:7930fc3679834cc481d1db79b243ce9566e75ba01ec71124299f4005cfa451ab"},
+    {file = "sourcery-1.19.0-py2.py3-none-manylinux1_x86_64.whl", hash = "sha256:20916e32dadd747722b8719e882bafe2181ca3d137189bde7a02fb741995980c"},
+    {file = "sourcery-1.19.0-py2.py3-none-win_amd64.whl", hash = "sha256:2358533cd188f37ded51a5c17bb620686f4f1e5b9170aaeb04ef961f801146d0"},
 ]
 
 [[package]]
