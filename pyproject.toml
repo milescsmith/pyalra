@@ -4,7 +4,7 @@ build-backend = "pdm.backend"
 
 [project]
 name = "pyalra"
-version = "1.6.0"
+version = "1.6.1"
 description = "Translation of the ALRA R package"
 authors = [
     {name = "Miles Smith", email = "miles-smith@omrf.org"},
