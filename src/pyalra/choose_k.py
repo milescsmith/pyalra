@@ -2,7 +2,7 @@ import numpy as np
 import numpy.typing as npt
 from sklearn.utils.extmath import randomized_svd
 
-
+# TODO add an option to use pytorch
 def choose_k(
     A_norm: npt.ArrayLike, K: int = 100, thresh: int = 6, noise_start: int = 80, q: int = 2, **kwargs
 ) -> tuple[int, npt.ArrayLike, npt.ArrayLike, npt.ArrayLike, npt.ArrayLike]:

@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## [1.6.2] - 2024/07/18
+
+### Changed
+
+- Downgrade required numpy version
+
 ## [1.6.1] - 2024/07/18
 
 ### Changed
