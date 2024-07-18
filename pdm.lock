@@ -5,7 +5,7 @@
 groups = ["default", "dev"]
 strategy = ["cross_platform", "inherit_metadata"]
 lock_version = "4.4.2"
-content_hash = "sha256:0ee120dc1de6aae358ccc97d3716cb499e34f6d42f5b2217f4c19dbf13831617"
+content_hash = "sha256:c1cb63c2f68f22ff5e604ff05050037f2e39b28aae668ed5cda3849053a9a2a7"
 
 [[package]]
 name = "argcomplete"
@@ -56,14 +56,14 @@ files = [
 
 [[package]]
 name = "exceptiongroup"
-version = "1.2.1"
+version = "1.2.2"
 requires_python = ">=3.7"
 summary = "Backport of PEP 654 (exception groups)"
 groups = ["dev"]
 marker = "python_version < \"3.11\""
 files = [
-    {file = "exceptiongroup-1.2.1-py3-none-any.whl", hash = "sha256:5258b9ed329c5bbdd31a309f53cbfb0b155341807f6ff7606a1e801a891b29ad"},
-    {file = "exceptiongroup-1.2.1.tar.gz", hash = "sha256:a4785e48b045528f5bfe627b6ad554ff32def154f42372786903b7abcfe1aa16"},
+    {file = "exceptiongroup-1.2.2-py3-none-any.whl", hash = "sha256:3111b9d131c238bec2f8f516e123e14ba243563fb135d3fe885990585aa7795b"},
+    {file = "exceptiongroup-1.2.2.tar.gz", hash = "sha256:47c2edf7c6738fafb49fd34290706d1a1a2f4d1c6df275526b62cbb4aa5393cc"},
 ]
 
 [[package]]
@@ -229,6 +229,33 @@ files = [
 ]
 
 [[package]]
+name = "ruff"
+version = "0.5.2"
+requires_python = ">=3.7"
+summary = "An extremely fast Python linter and code formatter, written in Rust."
+groups = ["dev"]
+files = [
+    {file = "ruff-0.5.2-py3-none-linux_armv6l.whl", hash = "sha256:7bab8345df60f9368d5f4594bfb8b71157496b44c30ff035d1d01972e764d3be"},
+    {file = "ruff-0.5.2-py3-none-macosx_10_12_x86_64.whl", hash = "sha256:1aa7acad382ada0189dbe76095cf0a36cd0036779607c397ffdea16517f535b1"},
+    {file = "ruff-0.5.2-py3-none-macosx_11_0_arm64.whl", hash = "sha256:aec618d5a0cdba5592c60c2dee7d9c865180627f1a4a691257dea14ac1aa264d"},
+    {file = "ruff-0.5.2-py3-none-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:a0b62adc5ce81780ff04077e88bac0986363e4a3260ad3ef11ae9c14aa0e67ef"},
+    {file = "ruff-0.5.2-py3-none-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:dc42ebf56ede83cb080a50eba35a06e636775649a1ffd03dc986533f878702a3"},
+    {file = "ruff-0.5.2-py3-none-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:c15c6e9f88c67ffa442681365d11df38afb11059fc44238e71a9d9f1fd51de70"},
+    {file = "ruff-0.5.2-py3-none-manylinux_2_17_ppc64.manylinux2014_ppc64.whl", hash = "sha256:d3de9a5960f72c335ef00763d861fc5005ef0644cb260ba1b5a115a102157251"},
+    {file = "ruff-0.5.2-py3-none-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:fe5a968ae933e8f7627a7b2fc8893336ac2be0eb0aace762d3421f6e8f7b7f83"},
+    {file = "ruff-0.5.2-py3-none-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:a04f54a9018f75615ae52f36ea1c5515e356e5d5e214b22609ddb546baef7132"},
+    {file = "ruff-0.5.2-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:1ed02fb52e3741f0738db5f93e10ae0fb5c71eb33a4f2ba87c9a2fa97462a649"},
+    {file = "ruff-0.5.2-py3-none-musllinux_1_2_aarch64.whl", hash = "sha256:3cf8fe659f6362530435d97d738eb413e9f090e7e993f88711b0377fbdc99f60"},
+    {file = "ruff-0.5.2-py3-none-musllinux_1_2_armv7l.whl", hash = "sha256:237a37e673e9f3cbfff0d2243e797c4862a44c93d2f52a52021c1a1b0899f846"},
+    {file = "ruff-0.5.2-py3-none-musllinux_1_2_i686.whl", hash = "sha256:2a2949ce7c1cbd8317432ada80fe32156df825b2fd611688814c8557824ef060"},
+    {file = "ruff-0.5.2-py3-none-musllinux_1_2_x86_64.whl", hash = "sha256:481af57c8e99da92ad168924fd82220266043c8255942a1cb87958b108ac9335"},
+    {file = "ruff-0.5.2-py3-none-win32.whl", hash = "sha256:f1aea290c56d913e363066d83d3fc26848814a1fed3d72144ff9c930e8c7c718"},
+    {file = "ruff-0.5.2-py3-none-win_amd64.whl", hash = "sha256:8532660b72b5d94d2a0a7a27ae7b9b40053662d00357bb2a6864dd7e38819084"},
+    {file = "ruff-0.5.2-py3-none-win_arm64.whl", hash = "sha256:73439805c5cb68f364d826a5c5c4b6c798ded6b7ebaa4011f01ce6c94e4d5583"},
+    {file = "ruff-0.5.2.tar.gz", hash = "sha256:2c0df2d2de685433794a14d8d2e240df619b748fbe3367346baa519d8e6f1ca2"},
+]
+
+[[package]]
 name = "scikit-learn"
 version = "1.5.1"
 requires_python = ">=3.9"
@@ -298,13 +325,13 @@ files = [
 
 [[package]]
 name = "sourcery"
-version = "1.20.0"
+version = "1.21.0"
 summary = "Magically refactor Python"
 groups = ["dev"]
 files = [
-    {file = "sourcery-1.20.0-py2.py3-none-macosx_10_9_universal2.whl", hash = "sha256:bc9fdc007039460cfcf85c47a4eea6ca14d6070e9d2269990efe511dfc13a3ec"},
-    {file = "sourcery-1.20.0-py2.py3-none-manylinux1_x86_64.whl", hash = "sha256:3571a94b66ac542cac2b9812be941ce8c7768ff702a69ff33a5d5f24cdd44044"},
-    {file = "sourcery-1.20.0-py2.py3-none-win_amd64.whl", hash = "sha256:c52c2da9a4b2e56e69a84777bedccc08cb035b2b6dfd4ae3b5426cfaf1f01764"},
+    {file = "sourcery-1.21.0-py2.py3-none-macosx_10_9_universal2.whl", hash = "sha256:a6f8cf3e34331a1e7f050d2037b39ea45cd276617a231f54044e2fa52f615113"},
+    {file = "sourcery-1.21.0-py2.py3-none-manylinux1_x86_64.whl", hash = "sha256:5fd7fb4e497335cdbf505e31f8fd14b4e27c516d7bf4a63d22ae24f47af2b125"},
+    {file = "sourcery-1.21.0-py2.py3-none-win_amd64.whl", hash = "sha256:22e2c17cba47b3bbdbe56c2fa14423d1f1e8077a16a0e8d42a32c914e279e25e"},
 ]
 
 [[package]]

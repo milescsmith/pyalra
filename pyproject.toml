@@ -1,13 +1,3 @@
-[tool.pdm]
-[tool.pdm.dev-dependencies]
-dev = [
-    "pytest>=8.2.2",
-    "nox>=2024.4.15",
-    "sourcery>=1.20.0",
-]
-
-[tool.pdm.build]
-includes = ["tests"]
 [build-system]
 requires = ["pdm-backend"]
 build-backend = "pdm.backend"
@@ -19,7 +9,7 @@ authors = [
 license = {text = "LGPL3"}
 requires-python = "<4,>=3.10"
 name = "pyalra"
-version = "1.5.0"
+version = "1.6.0"
 description = "Translation of the ALRA R package"
 readme = "README.md"
 dependencies = [
@@ -32,3 +22,21 @@ dependencies = [
 [project.urls]
 homepage = "https://github.com/milescsmith/pyalra"
 repository = "https://github.com/milescsmith/pyalra"
+
+[tool.pdm]
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "pytest>=8.2.2",
+    "nox>=2024.4.15",
+    "sourcery>=1.20.0",
+    "ruff>=0.5.2",
+]
+
+[tool.pdm.build]
+includes = ["tests"]
+
+[tool.pdm.scripts]
+format = "ruff format src/"
+lint = "ruff check --fix src/"
+all = {composite = ["format", "lint"]}
