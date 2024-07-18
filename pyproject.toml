@@ -3,15 +3,15 @@ requires = ["pdm-backend"]
 build-backend = "pdm.backend"
 
 [project]
-authors = [
-    {name = "Miles Smith", email = "miles-smith@omrf.org"},
-]
-license = {text = "LGPL3"}
-requires-python = "<4,>=3.10"
 name = "pyalra"
 version = "1.6.0"
 description = "Translation of the ALRA R package"
+authors = [
+    {name = "Miles Smith", email = "miles-smith@omrf.org"},
+]
+requires-python = "<4,>=3.10"
 readme = "README.md"
+license = {text = "LGPL3"}
 dependencies = [
     "scikit-learn>=1.5.1",
     "numpy>=2.0.0",
@@ -24,6 +24,7 @@ homepage = "https://github.com/milescsmith/pyalra"
 repository = "https://github.com/milescsmith/pyalra"
 
 [tool.pdm]
+distribution = false
 
 [tool.pdm.dev-dependencies]
 dev = [
@@ -32,9 +33,6 @@ dev = [
     "sourcery>=1.20.0",
     "ruff>=0.5.2",
 ]
-
-[tool.pdm.build]
-includes = ["tests"]
 
 [tool.pdm.scripts]
 format = "ruff format src/"

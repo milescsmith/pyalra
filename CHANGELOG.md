@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## [1.6.1] - 2024/07/18
+
+### Changed
+
+- Updated `.gitignore`
+
+### Fixed
+
+- Removed a issue in pyproject.toml that caused the package to not actually install anything
+
 ## [1.6.0] - 2024/07/16
 
 ### Added
@@ -63,6 +73,8 @@
 - Everything fully implemented
 
 
+[1.6.1]: https://github.com/milescsmith/pyalra/releases/compare/1.6.0..1.6.1
+[1.6.0]: https://github.com/milescsmith/pyalra/releases/compare/1.5.0..1.6.0
 [1.5.0]: https://github.com/milescsmith/pyalra/releases/compare/1.4.0..1.5.0
 [1.4.0]: https://github.com/milescsmith/pyalra/releases/compare/1.3.0..1.4.0
 [1.3.0]: https://github.com/milescsmith/pyalra/releases/compare/1.2.0..1.3.0
