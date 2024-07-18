@@ -162,3 +162,5 @@ cython_debug/
 **/*.h5ad
 **/*.h5mu
 **/*.db
+.mise.toml
+.pdm-python

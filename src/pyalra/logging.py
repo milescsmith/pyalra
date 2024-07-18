@@ -31,11 +31,7 @@ def init_logger(verbose: int, save_log: bool = True, msg_format: str | None = No
         case _:
             log_level = "ERROR"  # Catches ERROR, CRITICAL, and EXCEPTION
 
-    config = {
-        "handlers": [
-            {"sink": stderr, "format": msg_format, "level": log_level},
-        ]
-    }
+    config = {"handlers": [{"sink": stderr, "format": msg_format, "level": log_level}]}
 
     if save_log:
         config["handlers"].append(

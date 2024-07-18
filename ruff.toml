@@ -82,6 +82,9 @@ exclude = [
 "./tests/*" = ["S101", "PLR2004", "F811", "F401", "S301"]
 "**/main.py" = ["UP007", "FBT002"]
 
+[lint.flake8-tidy-imports]
+ban-relative-imports = "all"
+
 [format]
 # Like Black, use double quotes for strings.
 quote-style = "double"
@@ -90,10 +93,7 @@ quote-style = "double"
 indent-style = "space"
 
 # Like Black, respect magic trailing commas.
-skip-magic-trailing-comma = false
+skip-magic-trailing-comma = true
 
 # Like Black, automatically detect the appropriate line ending.
 line-ending = "auto"
-
-# Enable reformatting of code snippets in docstrings.
-docstring-code-format = true
