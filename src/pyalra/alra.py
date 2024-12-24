@@ -24,34 +24,33 @@ def alra(
 
     logger.info(f"Read matrix with {a_norm.shape[0]} cells and {a_norm.shape[1]} genes")
 
-    if isinstance(a_norm, np.matrix):
-        a_norm = a_norm.A
-    elif isinstance(a_norm, sp.sparse.spmatrix):
-        a_norm = a_norm.todense().A
-
     if k == 0:
-        k, *_ = choose_k(a_norm)
+        k, _, u, d, v = choose_k(a_norm)
         logger.info(f"Chose k = {k}")
+    else:
+        logger.debug("Running rsvd")
+        u, d, v = randomized_svd(M=a_norm, n_components=k, n_iter=q, random_state=seed)
 
     logger.info("Getting nonzeros\n")
     originally_nonzero = a_norm > 0
 
-    logger.debug("Running rsvd")
-    u, d, v = randomized_svd(M=a_norm, n_components=k, n_iter=q, random_state=seed)
-
-    a_norm_rank_k = np.matmul(np.matmul(u[:, :k], np.diag(d[:k])), v[:k, :])
+    a_norm_rank_k = u @ np.diag(d) @ v
 
     logger.info(f"Find the {quantile_prob} quantile for each gene")
-    a_norm_rank_k_mins = abs(np.quantile(a_norm_rank_k, axis=0, q=0.001))
+    a_norm_rank_k_mins = np.absolute(np.quantile(a_norm_rank_k, axis=0, q=0.001))
 
     logger.info("Sweep")
-    a_norm_rank_k_cor = a_norm_rank_k.copy()
-    a_norm_rank_k_cor[a_norm_rank_k <= np.tile(a_norm_rank_k_mins, (len(a_norm_rank_k), 1))] = 0
+    a_norm_rank_k_cor = np.zeros(shape=a_norm_rank_k.shape)
+    np.copyto(
+        dst=a_norm_rank_k_cor,
+        src=a_norm_rank_k,
+        where=(a_norm_rank_k > np.tile(a_norm_rank_k_mins, (len(a_norm_rank_k), 1))),
+    )
 
-    sigma_1 = sp.stats.tstd(a_norm_rank_k_cor, axis=0)
-    sigma_2 = sp.stats.tstd(a_norm, axis=0)
-    mu_1 = np.divide(np.sum(a_norm_rank_k_cor, axis=0), np.sum(a_norm_rank_k_cor > 0, axis=0))
-    mu_2 = np.divide(np.sum(a_norm, axis=0), np.sum(a_norm > 0, axis=0))
+    sigma_1 = np.nanstd(a_norm_rank_k_cor, axis=0)
+    sigma_2 = np.nanstd(a_norm, axis=0)
+    mu_1 = np.divide(a_norm_rank_k_cor.sum(axis=0), a_norm_rank_k_cor.sum(axis=0))
+    mu_2 = np.divide(a_norm.sum(axis=0), (a_norm > 0).sum(axis=0))
 
     toscale = np.logical_and(
         np.logical_and(~np.isnan(sigma_1), ~np.isnan(sigma_2)),
@@ -69,11 +68,12 @@ def alra(
     a_norm_rank_k_temp = np.add(a_norm_rank_k_temp, toadd[toscale])
 
     a_norm_rank_k_cor_sc = a_norm_rank_k_cor.copy()
-    a_norm_rank_k_cor_sc[:, toscale] = a_norm_rank_k_temp
-    a_norm_rank_k_cor_sc[a_norm_rank_k_cor == 0] = 0
+    np.copyto(dst=a_norm_rank_k_cor_sc[:, toscale], src=a_norm_rank_k_temp)
+    a_norm_rank_k_cor_sc_zeros = np.zeros_like(a_norm_rank_k_cor_sc)
+    np.copyto(dst=a_norm_rank_k_cor_sc, src=a_norm_rank_k_cor_sc_zeros, where=(a_norm_rank_k_cor == 0))
 
     lt0 = a_norm_rank_k_cor_sc < 0
-    a_norm_rank_k_cor_sc[lt0] = 0
+    np.copyto(dst=a_norm_rank_k_cor_sc, src=a_norm_rank_k_cor_sc_zeros, where=lt0)
 
     a_norm_size = a_norm.shape[0] * a_norm.shape[1]
     logger.info(
@@ -81,7 +81,7 @@ def alra(
     )
 
     nonzero_mask = np.logical_and(originally_nonzero, (a_norm_rank_k_cor_sc == 0))
-    a_norm_rank_k_cor_sc[nonzero_mask] = a_norm[nonzero_mask]
+    np.copyto(dst=a_norm_rank_k_cor_sc, src=a_norm, where=nonzero_mask)
 
     original_nz = np.sum(a_norm > 0) / a_norm_size
     completed_nz = np.sum(a_norm_rank_k_cor_sc > 0) / a_norm_size
