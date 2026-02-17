@@ -1,5 +1,21 @@
 # CHANGELOG
 
+## [1.6.3] - 2026/02/17
+
+### Added
+
+- Copied and modified the docstrings from the original ALRA package
+
+### Changed
+
+- Swapped build backend from hatchling to uv
+- Updated logging submodule to latest from https://github.com/milescsmith/schwanzstucker
+
+### Fixed
+
+- Fixed a few issues where things only worked with sparse arrays or didn't work with sparse arrays
+
+
 ## [1.6.2] - 2024/07/18
 
 ### Changed
@@ -79,6 +95,8 @@
 - Everything fully implemented
 
 
+[1.6.1]: https://github.com/milescsmith/pyalra/releases/compare/1.6.2..1.6.3
+[1.6.1]: https://github.com/milescsmith/pyalra/releases/compare/1.6.1..1.6.2
 [1.6.1]: https://github.com/milescsmith/pyalra/releases/compare/1.6.0..1.6.1
 [1.6.0]: https://github.com/milescsmith/pyalra/releases/compare/1.5.0..1.6.0
 [1.5.0]: https://github.com/milescsmith/pyalra/releases/compare/1.4.0..1.5.0

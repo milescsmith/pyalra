@@ -4,6 +4,7 @@ import numpy as np
 import numpy.typing as npt
 import pytest
 from numpy.testing import assert_allclose
+
 from pyalra.choose_k import choose_k
 
 

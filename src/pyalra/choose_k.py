@@ -2,11 +2,36 @@ import numpy as np
 import numpy.typing as npt
 from sklearn.utils.extmath import randomized_svd
 
-# TODO add an option to use pytorch
+
+# TODO add an option to use pytorch?
+# maybe just CuPy or Jax?
 def choose_k(
     A_norm: npt.ArrayLike, K: int = 100, thresh: int = 6, noise_start: int = 80, q: int = 2, **kwargs
-) -> tuple[int, npt.ArrayLike, npt.ArrayLike, npt.ArrayLike, npt.ArrayLike]:
-    if K > np.min(A_norm.shape):
+) -> tuple[int, np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+    """Really need a description of this, because 2 years later I don't remember exactly what it does
+
+    Parameters
+    ----------
+    A_norm : npt.ArrayLike
+        Log-transformed expression matrix
+    K : int, default=100
+        Number of singular values to compute. Must be < A_norm.shape[1]
+    thresh : int, default=6
+        Number of standard deviations away from noise must the singular values be?
+    noise_start : int, default=80
+        Index for which all smaller singular values are considered noise
+    q : int, default=2
+        Number of additional power iterations
+    kwargs
+
+    Returns
+    -------
+    A tuple containing:
+        * the chosen k : int
+        * P values of all k's examined : ArrayLike
+        * Singluar values of A_norm : ArrayLike
+    """
+    if K > np.min(A_norm.shape):  # ty:ignore[unresolved-attribute] <- sorry, but A_norm definitely has a shape
         msg = "For an m by n matrix, K must be smaller than the min(m,n)."
         raise ValueError(msg)
     if noise_start > (K - 5):

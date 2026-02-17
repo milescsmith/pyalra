@@ -1,40 +1,77 @@
 [build-system]
-requires = ["pdm-backend"]
-build-backend = "pdm.backend"
+requires = ["uv_build >= 0.7.0, <0.11.0"]
+build-backend = "uv_build"
 
 [project]
 name = "pyalra"
-version = "1.6.2"
+version = "1.6.3"
 description = "Translation of the ALRA R package"
 authors = [
     {name = "Miles Smith", email = "miles-smith@omrf.org"},
 ]
-requires-python = "<4,>=3.10"
+requires-python = "<4,>=3.12"
 readme = "README.md"
 license = {text = "LGPL3"}
 dependencies = [
-    "scikit-learn>=1.5.1",
-    "numpy>=1.26.0,<2.0.0",
+    "scikit-learn~=1.8",
+    "numpy>=2.2,<2.3", # fucking numba
     "loguru>=0.7.2",
-    "scipy>=1.14.0",
+    "scipy>=1.15.0",
+]
+classifiers = [
+    "Programming Language :: Python",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Rust",
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Typing :: Typed",
+    "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 
 [project.urls]
 homepage = "https://github.com/milescsmith/pyalra"
 repository = "https://github.com/milescsmith/pyalra"
 
-[tool.pdm]
-distribution = false
 
-[tool.pdm.dev-dependencies]
+[dependency-groups]
 dev = [
-    "pytest>=8.2.2",
-    "nox>=2024.4.15",
-    "sourcery>=1.20.0",
-    "ruff>=0.5.2",
+    "jupyterlab>=4.5.4",
+    "jupyterlab-execute-time>=3.3.0",
+    "ruff>=0.14.11",
+    "scanpy>=1.12",
+    "ty>=0.0.11",
+]
+tests = [
+    "codecov>=2.1.13",
+    "coverage>=7.8.0",
+    "nox>=2025.5.1",
+    "pytest>=8.3.5",
+    "pytest-xdist>=3.6.1",
 ]
 
-[tool.pdm.scripts]
-format = "ruff format src/"
-lint = "ruff check --fix src/"
-all = {composite = ["format", "lint"]}
+
+[tool.coverage.paths]
+source = ["src", "*/site-packages"]
+
+[tool.coverage.run]
+branch = true
+source = ["package"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 100
+
+[tool.pytest.ini_options]
+pythonpath = "."
+addopts = [
+    "--import-mode=importlib",
+]
+typeguard-packages = "package"
